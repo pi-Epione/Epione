@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.json.JsonValue;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -35,6 +36,7 @@ public class userService implements IuserServiceLocal, IuserServiceRemote {
 
 	@Override
 	public List<User> getAllUsers() {
+
 		return em.createQuery("select u from User u", User.class).getResultList();
 	}
 
@@ -63,12 +65,13 @@ public class userService implements IuserServiceLocal, IuserServiceRemote {
 	public JsonObject logIn(String email, String password) {
 		try {
 			password = Utils.toMD5(password);
-			
-					em.createQuery("SELECT u.id from User u WHERE u.email = :email and u.password = :password")
+
+			em.createQuery("SELECT u.id from User u WHERE u.email = :email and u.password = :password")
 					.setParameter("email", email).setParameter("password", password).getSingleResult();
 			getUserByEmail(email).setConnected(Boolean.TRUE);
 			getUserByEmail(email).setLastConnect(new Date());
-			return Json.createObjectBuilder().add("success", "Vous etes connecte").add("id", getUserByEmail(email).getId()).build();
+			return Json.createObjectBuilder().add("success", "Vous etes connecte")
+					.add("id", getUserByEmail(email).getId()).build();
 		} catch (NoResultException | NoSuchAlgorithmException e) {
 			return Json.createObjectBuilder().add("error", "Verifier vos donnees").build();
 		}
@@ -128,7 +131,6 @@ public class userService implements IuserServiceLocal, IuserServiceRemote {
 				.getSingleResult();
 
 	}
-	
 
 	public long emailExist(String email) {
 		return (long) em.createQuery("select count(u) from User u where u.email = :email").setParameter("email", email)

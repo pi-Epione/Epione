@@ -12,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import fr.epione.entity.Doctor;
@@ -66,8 +67,19 @@ public class userJAXRS {
 	@Path("enableUsers")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUserEnable() {
-		return userService.getUsersEnable();
+	public Response getUserEnable() {
+		List<User> list = userService.getUsersEnable();
+		GenericEntity<List<User>> entity = new GenericEntity<List<User>>(list){};
+		return Response.ok(entity).build();
+	}
+	
+	@Path("allUsers")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUsers(){
+		List<User> list = userService.getAllUsers();
+		GenericEntity<List<User>> entity = new GenericEntity<List<User>>(list){};
+		return Response.ok(entity).build();
 	}
 
 	@GET
