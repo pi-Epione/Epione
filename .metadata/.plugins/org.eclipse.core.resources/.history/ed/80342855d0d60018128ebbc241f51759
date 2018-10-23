@@ -1,0 +1,9 @@
+package tn.esprit.entity;
+
+import java.util.Date;
+
+public class TimeSheetPK {
+
+	private Date dateDebut;
+	private Date dateFin;
+}

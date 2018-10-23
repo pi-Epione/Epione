@@ -1,0 +1,26 @@
+package tn.main;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import tn.esprit.entity.Employe;
+import tn.esprit.entity.Role;
+import tn.esprit.service.employeServiceRemote;
+
+
+public class test2 {
+
+	public static void main(String[] args) throws NamingException {
+		String jndiName="serveur/employeService!tn.esprit.service.employeServiceRemote";
+		Context context= new InitialContext();
+		employeServiceRemote proxy = (employeServiceRemote) context.lookup(jndiName);
+		
+		Employe employe1 = new Employe("khaled.kallel@ssiconsulting.tn",1,"kallel","khaled",Role.ingenieur);
+		Employe employe2 = new Employe("mohamed.zitouni@ssiconsulting.tn",1,"zitouni","ahmed",Role.technicien);
+		
+		proxy.ajouterEmploye(employe1);
+		proxy.ajouterEmploye(employe2);
+	}
+
+}

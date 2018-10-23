@@ -1,0 +1,42 @@
+package tn.main;
+
+import java.util.Date;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import tn.esprit.entity.Contrat;
+import tn.esprit.entity.Departement;
+import tn.esprit.entity.Employe;
+import tn.esprit.entity.Entreprise;
+import tn.esprit.entity.Role;
+
+import tn.esprit.service.entrepriseServiceRemote;
+
+public class test1 {
+
+	public static void main(String[] args) throws NamingException {
+		String jndiName="serveur/entrepriseService!tn.esprit.service.entrepriseServiceRemote";
+		Context context= new InitialContext();
+		entrepriseServiceRemote proxy = (entrepriseServiceRemote) context.lookup(jndiName);
+		
+		Entreprise entreprise = new Entreprise("SSI Consulting","Cite El Ghazela");
+		
+		Departement departement = new Departement("Telecome");
+		Departement departement2 = new Departement("RH");
+		
+		//Employe employe1 = new Employe("khaled.kallel@ssiconsulting.tn",1,"kallel","khaled",Role.ingenieur);
+		//Employe employe2 = new Employe("mohamed.zitouni@ssiconsulting.tn",1,"zitouni","ahmed",Role.technicien);
+		
+	
+				
+		proxy.affecterDepartementAEntreprise(1,1);
+		proxy.affecterDepartementAEntreprise(idDepartementTelecom,idEntreprise);
+		
+		
+		
+		
+	}
+
+}

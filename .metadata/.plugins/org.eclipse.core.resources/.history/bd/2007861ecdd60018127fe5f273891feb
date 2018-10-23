@@ -1,0 +1,27 @@
+package tn.esprit.service;
+
+import java.util.Date;
+
+import tn.esprit.entity.Mission;
+
+public class timeSheetService implements timeSheetServiceRemote{
+
+	@Override
+	public int ajouterMission(Mission mission) {
+		
+	}
+
+	@Override
+	public void affecterMissionADepartement(int missionId, int depId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

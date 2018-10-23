@@ -1,0 +1,70 @@
+package tn.esprit.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Departement implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	private String name;
+	@ManyToMany (mappedBy="listDepartements")
+	private List<Employe> listEmployes;
+	@ManyToOne
+	private Entreprise entreprise;
+	@OneToMany(mappedBy="departement")
+	private List<Mission> listMissions;
+	
+	
+	
+	public Departement(String name) {
+		super();
+		this.name = name;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<Employe> getListEmployes() {
+		return listEmployes;
+	}
+	public void setListEmployes(List<Employe> listEmployes) {
+		this.listEmployes = listEmployes;
+	}
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
+	public List<Mission> getListMissions() {
+		return listMissions;
+	}
+	public void setListMissions(List<Mission> listMissions) {
+		this.listMissions = listMissions;
+	}
+	
+	
+}

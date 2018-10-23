@@ -1,0 +1,8 @@
+package fr.epione.service;
+
+import javax.ws.rs.Path;
+
+@Path("user")
+public class userService {
+
+}

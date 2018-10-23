@@ -1,0 +1,41 @@
+package test;
+
+import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import fr.epione.entity.Doctor;
+import fr.epione.entity.User;
+import fr.epione.interfaces.IuserServiceRemote;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+public class main {
+
+	public static void main(String[] args) throws NamingException {
+		String jndiName="epioneServer/userService!fr.epione.interfaces.IuserServiceRemote";
+		Context context= new InitialContext();
+		IuserServiceRemote proxy = (IuserServiceRemote) context.lookup(jndiName);
+		User user = new User();
+		user.setFirstName("deco");
+		user.setLastName("deco");
+		user.setEmail("deczeko@dezeco.tn");
+		user.setPassword("deco");
+		user.setConnected(Boolean.FALSE);
+		//int id =proxy.addUser(user);
+		//System.out.println(proxy.logIn("deco", "deco"));
+		proxy.signIn(user);
+		//System.out.println(issueToken("khalil"));
+	
+		
+
+	}
+}

@@ -1,0 +1,66 @@
+package tn.esprit.service;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import tn.esprit.entity.Contrat;
+import tn.esprit.entity.Departement;
+import tn.esprit.entity.Employe;
+
+@Stateless
+public class employeService implements employeServiceRemote{
+
+	@PersistenceContext(unitName="timesheetDS")
+	EntityManager em;
+	@Override
+	public int ajouterEmploye(Employe employe) {
+		em.persist(employe);
+		return employe.getId();
+	}
+
+	@Override
+	public void affecterEmployeADepartement(int employeId, int depId) {
+			Employe employe = em.find(Employe.class, employeId);
+			Departement departement = em.find(Departement.class, depId);
+			
+			employe.getListDepartements().add(departement);
+			//departement.getListEmployes().add(employe);
+	}
+
+	@Override
+	public int ajouterContrat(Contrat contrat) {
+		em.persist(contrat);
+		return contrat.getReference();
+	}
+
+	@Override
+	public void affecterContratAEmploye(int contratId, int employeId) {
+		Contrat contrat = em.find(Contrat.class, contratId);
+		Employe employe = em.find(Employe.class, employeId);
+		contrat.setEmploye(employe);
+		
+	}
+
+	@Override
+	public String getEmployePrenomById(int employeId) {
+		Employe employe = em.find(Employe.class, employeId);
+		return employe.getNom();
+	}
+
+	@Override
+	public long getNombreEmployeJPQL() {
+		TypedQuery<ong> query = em.createQuery("select count(e) from Employe e",Long.class);
+		return query.getSingleResult();
+	}
+
+	@Override
+	public List<String> getAllEmployeNamesJPQL() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

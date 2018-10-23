@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;serveur/src/main/java/tn.esprit.entity&apos;&#x0D;&#x0A;- Original project: &apos;timesheet&apos;&#x0D;&#x0A;- Destination element: &apos;serveur/src/main/java/tn.esprit.entity&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     tn.esprit.entity.Employe.java&#x0D;&#x0A;     tn.esprit.entity.Departement.java" description="Copy compilation units" destination="=serveur/src\/main\/java&lt;tn.esprit.entity" element1="/src\/main\/java&lt;tn.esprit.entity{Employe.java" element2="/src\/main\/java&lt;tn.esprit.entity{Departement.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1539698256076" units="2" version="1.0"/>
+</session>

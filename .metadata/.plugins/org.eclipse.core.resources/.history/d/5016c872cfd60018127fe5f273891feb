@@ -1,0 +1,26 @@
+package tn.esprit.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class TimeSheetPK implements Serializable{
+
+	private int idMission;
+	private int idEmploye;
+	public int getIdMission() {
+		return idMission;
+	}
+	public void setIdMission(int idMission) {
+		this.idMission = idMission;
+	}
+	public int getIdEmploye() {
+		return idEmploye;
+	}
+	public void setIdEmploye(int idEmploye) {
+		this.idEmploye = idEmploye;
+	}
+	
+	
+}

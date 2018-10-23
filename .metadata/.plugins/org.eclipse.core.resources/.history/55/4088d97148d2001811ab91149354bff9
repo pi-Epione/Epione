@@ -1,0 +1,16 @@
+package tn.esprit.service;
+
+import java.util.List;
+
+import javax.ejb.Remote;
+
+import tn.esprit.entity.Departement;
+import tn.esprit.entity.Entreprise;
+
+@Remote
+public interface entrepriseServiceRemote {
+	int ajouterEntreprise(Entreprise entreprise);
+	int ajouterDepartement(Departement departement);
+	void affecterDepartementAEntreprise(int depId,int entrepriseId);
+	void getAllDepartementsNamesByEntreprise(int entrepriseId);
+}

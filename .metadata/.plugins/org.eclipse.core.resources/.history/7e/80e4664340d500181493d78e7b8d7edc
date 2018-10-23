@@ -1,0 +1,68 @@
+package test;
+
+import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import fr.epione.entity.Doctor;
+import fr.epione.entity.User;
+import fr.epione.interfaces.IuserServiceRemote;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+public class main {
+
+	public static void main(String[] args) throws NamingException {
+		String jndiName="epioneServer/userService!fr.epione.interfaces.IuserServiceRemote";
+		Context context= new InitialContext();
+		IuserServiceRemote proxy = (IuserServiceRemote) context.lookup(jndiName);
+		User user = new User();
+		user.setFirstName("deco");
+		user.setLastName("deco");
+		user.setEmail("deco");
+		user.setPassword("deco");
+		user.setConnected(Boolean.FALSE);
+		//int id =proxy.addUser(user);
+		//System.out.println(proxy.logIn("deco", "deco"));
+		//proxy.signIn(user);
+		System.out.println(issueToken("khalil"));
+	
+		
+
+	}
+	public static String issueToken(String username) {
+		// UriInfo uriInfo= null;
+		// Issue a token (can be a random String persisted to a database or a
+		// JWT token)
+		// The issued token must be associated to a user
+		// Return the issued token
+		String keyString = "simplekey";
+		Key key = new SecretKeySpec(keyString.getBytes(), 0, keyString.getBytes().length, "DES");
+		// System.out.println("the key is : " + key.hashCode());
+		// System.out.println("\nuriInfo.getAbsolutePath().toString() : " + uriInfo.getAbsolutePath().toString());
+		// System.out.println("\nExpiration date: " + toDate(LocalDateTime.now().plusMinutes(15L)));
+
+		String jwtToken = Jwts.builder()
+				.setSubject(username)
+				// .setIssuer(uriInfo.getAbsolutePath().toString())
+				//.setIssuedAt(new Date())
+				//.setExpiration(toDate(LocalDateTime.now().plusMinutes(15L)))
+				//.signWith(SignatureAlgorithm.HS512, key)
+				.compact();
+		//System.out.println("the returned token is : " + jwtToken);
+
+		return jwtToken;
+	}
+	public static Date toDate(LocalDateTime localDateTime) {
+		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+}

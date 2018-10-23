@@ -1,0 +1,38 @@
+package test;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sound.midi.Soundbank;
+
+import fr.epione.entity.Doctor;
+import fr.epione.entity.User;
+import fr.epione.interfaces.IuserServiceRemote;
+
+
+public class main {
+
+	public static void main(String[] args) throws NamingException {
+		String jndiName="epioneServer/userService!fr.epione.interfaces.IuserServiceRemote";
+		Context context= new InitialContext();
+		IuserServiceRemote proxy = (IuserServiceRemote) context.lookup(jndiName);
+		User user = new User();
+		user.setFirstName("deco");
+		user.setLastName("deco");
+		user.setEmail("khalil@benmiled.tn");
+		user.setPassword("khalil");
+		user.setConnected(Boolean.FALSE);
+		Doctor doctor = new Doctor();
+		doctor.setFirstName("doctor");
+		doctor.setLastName("doctor");
+		//int id =proxy.addUser(user);
+		//System.out.println(proxy.logIn("khalil@benmiledddddd.tn", "Khalil123456"));
+		//System.out.println(proxy.getUserByEmail("khalil@benmiledddddd.tn"));
+		//proxy.signIn(user);
+		//System.out.println(issueToken("khalil"));
+		//System.out.println(proxy.logOut(20));
+	
+		
+
+	}
+}

@@ -1,0 +1,49 @@
+package tn.esprit.service;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import tn.esprit.entity.Departement;
+import tn.esprit.entity.Entreprise;
+
+@Stateless
+public class entrepriseService implements entrepriseServiceRemote{
+
+	@PersistenceContext(unitName="timesheetDS")
+	EntityManager em;
+
+	@Override
+	public int ajouterEntreprise(Entreprise entreprise) {
+		em.persist(entreprise);
+		return entreprise.getId();
+	}
+
+	@Override
+	public int ajouterDepartement(Departement departement) {
+		em.persist(departement);
+		return departement.getId();
+	}
+
+	@Override
+	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
+		Entreprise entreprise = em.find(Entreprise.class, entrepriseId);
+		Departement departement = em.find(Departement.class, depId);
+		departement.setEntreprise(entreprise);
+	}
+
+
+	@Override
+	public void getAllDepartementsNamesByEntreprise(int entrepriseId) {
+		TypedQuery<Departement> query = em.createQuery("select d from Departement ",Departement.class);
+				
+		List<Departement> list = query.getResultList();
+		for (Departement dep : list){
+			System.out.println(dep.getName());
+		}
+	}
+
+}

@@ -1,0 +1,25 @@
+package fr.epione.service;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("greetings")
+public class userService {
+	
+	
+	@Inject
+	IuserServiceLocal service;
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("{firstname}/{lastname}")
+	public String sayHello(@PathParam(value="firstname")String nom,@PathParam(value="lastname")String prenom) {
+		//return "hello from jax-rs " + nom +" "+prenom;
+		service.afficheId();
+	}
+	
+	
+}

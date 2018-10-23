@@ -1,0 +1,13 @@
+package fr.epione.service;
+
+import javax.ejb.Local;
+import javax.json.JsonObject;
+
+import fr.epione.entity.Doctor;
+
+@Local
+public interface IuserServiceLocal {
+	JsonObject FirstSignUpDoctor(Doctor d);
+	JsonObject test();
+	int test();
+}

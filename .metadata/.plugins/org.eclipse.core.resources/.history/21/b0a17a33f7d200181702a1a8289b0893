@@ -1,0 +1,67 @@
+package fr.epione.service;
+
+import javax.ejb.Stateless;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.json.JsonObjectBuilder;
+import javax.json.Json;
+import javax.json.JsonObject;
+import fr.epione.entity.Doctor;
+
+@Stateless
+public class userService implements IuserServiceRemote{
+
+	@PersistenceContext(unitName="back-end-ejb")
+	EntityManager em;
+	
+	public JsonObject test(){
+		 return Json.createObjectBuilder()
+			     .add("firstName", "John")
+			     .add("lastName", "Smith")
+			     .add("age", 25)
+			     .add("address", Json.createObjectBuilder()
+			         .add("streetAddress", "21 2nd Street")
+			         .add("city", "New York")
+			         .add("state", "NY")
+			         .add("postalCode", "10021"))
+			     .add("phoneNumber", Json.createArrayBuilder()
+			         .add(Json.createObjectBuilder()
+			             .add("type", "home")
+			             .add("number", "212 555-1234"))
+			         .add(Json.createObjectBuilder()
+			             .add("type", "fax")
+			             .add("number", "646 555-4567")))
+			     .build();	
+	}
+	@Override
+	public JsonObject FirstSignUpDoctor(Doctor d) {
+		JsonObjectBuilder errorBuilder=Json.createObjectBuilder();
+		/*JsonObjectBuilder successBuilder=Json.createObjectBuilder();
+		if(!isValidEmail(d.getEmail())){
+			errorBuilder.add("error", "email non valid");
+			return errorBuilder.build();
+			}
+		else{
+			em.persist(d);
+		}
+		successBuilder.add("success", "ajout efectue");
+		return successBuilder.build();
+		*/
+		return null;
+	}
+	
+	public boolean isValidEmail(String email){
+		 boolean isValid = false;
+		try {
+			InternetAddress internetAdresse = new InternetAddress(email);
+			internetAdresse.validate();
+			isValid = true;
+		} catch (AddressException e) {
+			isValid = false;
+		}
+		return isValid;
+		
+	}
+}

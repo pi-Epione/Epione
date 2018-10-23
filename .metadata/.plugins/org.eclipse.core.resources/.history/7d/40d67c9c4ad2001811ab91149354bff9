@@ -1,0 +1,8 @@
+package tn.esprit.service;
+
+import javax.ejb.Stateless;
+
+@Stateless
+public class employeService implements employeServiceRemote{
+
+}

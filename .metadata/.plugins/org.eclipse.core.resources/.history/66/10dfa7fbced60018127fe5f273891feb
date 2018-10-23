@@ -1,0 +1,41 @@
+package tn.esprit.service;
+
+import java.util.Date;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import tn.esprit.entity.Departement;
+import tn.esprit.entity.Employe;
+import tn.esprit.entity.Mission;
+import tn.esprit.entity.TimeSheet;
+
+public class timeSheetService implements timeSheetServiceRemote{
+
+	@PersistenceContext(unitName="timesheetDS")
+	EntityManager em;
+	@Override
+	public int ajouterMission(Mission mission) {
+		em.persist(mission);
+		return mission.getId();
+	}
+
+	@Override
+	public void affecterMissionADepartement(int missionId, int depId) {
+		Mission mission = em.find(Mission.class, missionId);
+		mission.setDepartement(em.find(Departement.class, depId));
+		
+	}
+
+	@Override
+	public void ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
+		Mission mission =em.find(Mission.class, missionId);
+		Employe employe = em.find(Employe.class, employeId);
+		TimeSheet time = new TimeSheet();
+		time.setDateDebut(dateDebut);
+		time.setDateFin(dateFin);
+		
+	}
+
+	
+}

@@ -1,0 +1,58 @@
+package tn.esprit.service;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import tn.esprit.entity.Contrat;
+import tn.esprit.entity.Employe;
+
+@Stateless
+public class employeService implements employeServiceRemote{
+
+	@PersistenceContext(unitName="timesheetDS")
+	EntityManager em;
+	@Override
+	public int ajouterEmploye(Employe employe) {
+	
+	}
+
+	@Override
+	public void affecterEmployeADepartement(int employeId, int depId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int ajouterContrat(Contrat contrat) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void affecterContratAEmploye(int contratId, int employeId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getEmployePrenomById(int employeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getNombreEmployeJPQL() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<String> getAllEmployeNamesJPQL() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

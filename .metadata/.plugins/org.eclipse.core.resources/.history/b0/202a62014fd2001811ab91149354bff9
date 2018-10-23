@@ -1,0 +1,48 @@
+package tn.main;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import tn.esprit.entity.Contrat;
+import tn.esprit.entity.Departement;
+import tn.esprit.entity.Employe;
+import tn.esprit.entity.Role;
+import tn.esprit.service.employeServiceRemote;
+import tn.esprit.service.entrepriseServiceRemote;
+
+
+public class test2 {
+
+	public static void main(String[] args) throws NamingException {
+		String jndiName="serveur/employeService!tn.esprit.service.employeServiceRemote";
+		String jndiNameDep="serveur/entrepriseService!tn.esprit.service.entrepriseServiceRemote";
+		Context context= new InitialContext();
+		
+		employeServiceRemote proxy = (employeServiceRemote) context.lookup(jndiName);
+		entrepriseServiceRemote proxyDep = (entrepriseServiceRemote) context.lookup(jndiNameDep);
+		
+		
+		Employe employe1 = new Employe("khaled.kallel@ssiconsulting.tn",1,"kallel","khaled",Role.ingenieur);
+		Employe employe2 = new Employe("mohamed.zitouni@ssiconsulting.tn",1,"zitouni","ahmed",Role.technicien);
+		
+		int idEmploye1 = proxy.ajouterEmploye(employe1);
+		int idEmploye2 = proxy.ajouterEmploye(employe2);
+		
+		Departement departement = new Departement("Telecome");
+		Departement departement2 = new Departement("RH");
+		
+		int idDepartementTelecom = proxyDep.ajouterDepartement(departement);
+		int idDepartementRH = proxyDep.ajouterDepartement(departement2);
+		
+		proxy.affecterEmployeADepartement(idEmploye1, idDepartementTelecom);
+		Date date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		date = sdf.parse("2010-10-10");
+		Contrat contrat = new Contrat(1,date , 1600 ,"cdi");
+	}
+
+}

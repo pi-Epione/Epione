@@ -1,0 +1,7 @@
+package fr.epione.activator;
+
+import javax.ws.rs.core.Application;
+
+public class Activator extends Application{
+
+}

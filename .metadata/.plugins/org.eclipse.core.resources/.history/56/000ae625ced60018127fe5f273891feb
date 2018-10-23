@@ -1,0 +1,9 @@
+package tn.esprit.entity;
+
+import java.io.Serializable;
+
+public class TimeSheetPK implements Serializable{
+
+	private int idMission;
+	private int idEmploye;
+}

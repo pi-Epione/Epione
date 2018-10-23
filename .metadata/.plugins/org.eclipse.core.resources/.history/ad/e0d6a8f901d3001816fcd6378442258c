@@ -1,0 +1,10 @@
+package fr.epione.service;
+
+import javax.inject.Inject;
+import javax.ws.rs.Path;
+
+@Path("user")
+public class userService {
+@Inject
+IuserServiceLocal userService;
+}

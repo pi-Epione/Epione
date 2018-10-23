@@ -1,0 +1,13 @@
+package fr.epione.service;
+
+import javax.ejb.Remote;
+import javax.json.JsonObject;
+
+import fr.epione.entity.Doctor;
+
+@Remote
+public interface IuserServiceRemote {
+	JsonObject FirstSignUpDoctor(Doctor d);
+	JsonObject test();
+	int afficheMSG();
+}
